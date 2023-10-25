@@ -1,0 +1,36 @@
+schemaVersion: 2.1.0
+metadata:
+  name: devspaces-test-project
+components:
+  - name: tools
+    container:
+      image: registry.redhat.io/devspaces/udi-rhel8:3.8
+      memoryLimit: '3Gi'
+      memoryRequest: '2Gi'
+      cpuLimit: '4'
+      cpuRequest: '1'
+      endpoints:
+        - exposure: none
+          name: debug
+          protocol: tcp
+          targetPort: 5005
+      volumeMounts:
+        - name: m2
+          path: /home/user/.m2
+        - name: gradle
+          path: /home/user/.gradle
+  - name: m2
+    volume:
+      size: 1G
+  - name: gradle
+    volume:
+      size: 1G
+commands:
+  - id: build
+    exec:
+      component: tools
+      workingDir: ${PROJECTS_ROOT}/devspaces-test-project
+      commandLine: ./gradlew clean
+      group:
+        kind: build
+        isDefault: true
