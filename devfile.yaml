@@ -34,3 +34,20 @@ commands:
       group:
         kind: build
         isDefault: true
+commands:
+  - id: 1-update-dependencies
+    exec:
+      label: Update dependencies
+      component: tools
+      workingDir: ${PROJECTS_ROOT}/dotnet-web-simple
+      commandLine: "dotnet restore"
+      group:
+        kind: build
+  - id: 2-run
+    exec:
+      label: Run
+      component: tools
+      workingDir: ${PROJECTS_ROOT}/dotnet-web-simple
+      commandLine: "echo Lorem > /home/user/mfile.txt"
+      group:
+        kind: run        
