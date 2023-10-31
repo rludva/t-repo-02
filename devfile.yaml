@@ -34,8 +34,7 @@ commands:
       group:
         kind: build
         isDefault: true
-commands:
-  - id: 1-update-dependencies
+  - id: 2-update-dependencies
     exec:
       label: Update dependencies
       component: tools
@@ -43,7 +42,7 @@ commands:
       commandLine: "dotnet restore"
       group:
         kind: build
-  - id: 2-run
+  - id: 3-run
     exec:
       label: Run
       component: tools
